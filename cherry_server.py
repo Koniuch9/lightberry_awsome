@@ -55,21 +55,17 @@ function slideB(v) {
 		b = v;
 		setClip();
 	}
+
+window.onscroll = function() {
+	window.scrollTo(0,0);
+}
 </script>
 </head>
 <style>
 	img {
+		margin-left:80px;
 		position:absolute;
-		left:0;
-		right:0;
-		margin-left:auto;
-		margin-right:auto;
 		width:480px
-	}
-	input {
-		width:90%;
-		margin-right:50px;
-		margin-left:50px;
 	}
 	button {
 		width:12%;
@@ -77,7 +73,13 @@ function slideB(v) {
 	}
 </style>
 <body>
-<img id="screen" src="/images2/screenshot.png" width="480" height="320"/>
+<div style="position:absolute" onscroll="onskrol()">
+<img id="screen" src="/images2/screenshot.png" width="480px" height="320px"/>
+<input type="range" style="position:absolute;top:325px;left:350px;width:200px" min="280" max="480" value="480" id="range" oninput="slideR(this.value)" onchange="slideR(this.value)" />
+<input type="range" style="position:absolute;top:325px;left:90px;width:200px" min="0" max="200" value="0" id="range" onchange="slideL(this.value)" oninput="slideL(this.value)" />
+<input type="range" style="touch-action:none;position:absolute;top:50px;width:100px;transform:rotate(90deg);" min="0" max="100" value="0" id="range" onchange="slideT(this.value)" oninput="slideT(this.value)" />
+<input type="range" style="touch-action:none;position:absolute;top:250px;width:100px;transform:rotate(90deg);" min="220" max="320" value="320" id="range" onchange="slideB(this.value)" oninput="slideB(this.value)" />
+</div>
 <div style="position:relative;top:360px">
 <div style="margin:50px">
 <button onclick="topUp()">GORA+</button>
@@ -89,25 +91,14 @@ function slideB(v) {
 <button onclick="bottomUp()">DOL+</button>
 <button onclick="bottomDown()">DOL-</button>
 </div>
-<br/>
-<p>PRAWO</p>
-<input type="range" min="0" max="480" value="480" id="range" onchange="slideR(this.value)" />
-<br/>
-<p>LEWO</p>
-<input type="range" min="0" max="480" value="0" id="range" onchange="slideL(this.value)" />
-<br/>
-<p>GORA</p>
-<input type="range" min="0" max="320" value="0" id="range" onchange="slideT(this.value)" />
-<br/>
-<p>DOL</p>
-<input type="range" min="0" max="320" value="320" id="range" onchange="slideB(this.value)" />
+
 <p id="test" >SIEMA TEST</p><br/>
 <form action="hello" method="post">
 	<input id="t" type="hidden" name="top" />
 	<input id="r" type="hidden" name="right" />
 	<input id="b" type="hidden" name="bottom" />
 	<input id="l" type="hidden" name="left" />
-	<input type="submit" name="submit" />
+	<input style="width:100px;height:100px;color:red" type="submit" name="submit" />
 </form><br/><br/>
 <form action="restart" method="post" style="margin-top:50px">
 	<button name="submit2">RESTART</input>
@@ -134,7 +125,7 @@ function slideB(v) {
 		return "<h1>Restarted</h1>"
 
 if __name__ == '__main__':
-	cherrypy.config.update({'server.socket_host' : '192.168.1.103',
+	cherrypy.config.update({'server.socket_host' : '192.168.0.103',
 		'server.socket_port' : 8080})
 	conf = {'/images2' : {'tools.staticdir.on' : True,
 		'tools.staticdir.dir' : '/home/pi/images2'}}
