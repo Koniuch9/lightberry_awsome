@@ -1,0 +1,10 @@
+[Unit]
+Description=Main script
+After=loopVideo.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/videoCapture/captureVideo.py
+
+[Install]
+WantedBy=loopVideo.service

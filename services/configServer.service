@@ -1,0 +1,10 @@
+[Unit]
+Description=LAN config sever
+After=captureVideo.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/cherry_server.py
+
+[Install]
+WantedBy=captureVideo.service

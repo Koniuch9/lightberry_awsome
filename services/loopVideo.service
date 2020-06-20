@@ -1,0 +1,11 @@
+[Unit]
+Description=Copy video0 to 2 and 3
+BindsTo=dev-video0.device
+After=dev-video0.device
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/bootScripts/copyVideo.py
+
+[Install]
+WantedBy=graphical.target
